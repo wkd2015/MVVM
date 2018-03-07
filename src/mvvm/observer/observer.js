@@ -1,4 +1,5 @@
 import Dep from "./dep";
+
 class Observer {
     constructor(data, vm) {
         this.data = data;
@@ -20,8 +21,9 @@ class Observer {
         })
     }
     walk() {
-        Object.keys(this.data).forEach(key => {
-            defineReactive(key, this.data[key]);
+        let self = this;
+        Object.keys(this.data).forEach(function(key) {
+            self.defineReactive(key, self.data[key]);
         });
     }
 }

@@ -1,4 +1,5 @@
 import Watch from "../watch/watch";
+
 class Compile {
     constructor(node, vm) {
         this.node = node;
@@ -15,15 +16,17 @@ class Compile {
     }
     compileElement(node) {
         const reg = /\{\{(.*)\}\}/;
+        let self = this;
         if (node.nodeType === 1) {
             let attrs = node.attributes;
             for (let i = 0; i < attrs.length; i++) {
                 if (attrs[i].nodeName == 'v-model') {
                     var name = attrs[i].nodeValue
+                    console.log(name);
                     node.addEventListener('input', function (e) {
-                        this.vm[name] = e.target.value;
+                        self.vm[name] = e.target.value;
                     });
-                    node.value = this.vm[name];
+                    node.value = self.vm[name];
                     node.removeAttribute('v-model');
                 }
             }
