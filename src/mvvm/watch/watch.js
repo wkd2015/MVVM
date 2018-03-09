@@ -2,17 +2,16 @@ import Dep from "../observer/dep";
 
 class Watch {
     constructor(vm, node, name, nodeType){
-        Dep.target = this;
+        Dep.target = this; //关联Dep.target到Watch的this上，并更新this上的属性
         this.name = name;
         this.node = node;
         this.vm = vm;
         this.nodeType = nodeType;
-        this.update();
+        this.update(); //触发update
         Dep.target = null;
     }
     update() {
         this.get();
-        console.log(this.vm)
         if (this.nodeType == 'input') {
             this.node.value = this.value;
         }
@@ -21,7 +20,6 @@ class Watch {
         }
     }
     get() {
-        console.log(1111);
         this.value = this.vm[this.name];
     }
 }
