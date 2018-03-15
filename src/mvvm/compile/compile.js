@@ -10,7 +10,7 @@ class Compile {
         let child;
         while (child = this.node.firstChild) {
             this.compileElement(child);
-            frag.append(child);
+            frag.appendChild(child);
         }
         return frag;
     }
