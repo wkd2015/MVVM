@@ -5,7 +5,7 @@ class Dep {
     addSub(sub) {
         this.subs.push(sub)
     }
-    notify() {
+    notify() {//管理器接收通知，并通知每一个订阅者
         this.subs.forEach(sub => {
             sub.update()
         });
